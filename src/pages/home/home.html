@@ -1,14 +1,19 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      YouDoYou
     </ion-title>
+    <ion-buttons end>Add Todo
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+<ion-tabs>
+  <ion-tab [root]="todoTab" tabTitle="To Do" tabIcon="bulb"></ion-tab>
+  <ion-tab [root]="completedTab" tabTitle="Completed" tabIcon="checkmark"></ion-tab>
+  <ion-tab [root]="profileTab" tabTitle="Profile" tabIcon="happy"></ion-tab>
+</ion-tabs>
+<!--
+
+-->

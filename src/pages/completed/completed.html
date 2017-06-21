@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Completed</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+<ul class="demo-list-two mdl-list">
+  <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let complete of completed | async" (click)="showOptions(complete)">
+    <span class="mdl-list__item-primary-content">
+      <span>{{complete.title}}</span>
+      <span class="mdl-list__item-sub-title">Due: {{complete.due}} - <span id="timeTilDue"> ({{this.timeTilDue(complete)}})</span></span>
+    </span>
+    <span class="mdl-list__item-secondary-content">
+      <span class="mdl-list__item-secondary-info">Skill: {{complete.skill}}</span>
+      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">done</i></a>
+    </span>
+  </li>
+</ul>
+
+</ion-content>
