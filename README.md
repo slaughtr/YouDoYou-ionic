@@ -1,26 +1,90 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+YouDoYou
+======
 
-## How to use this template
+#### By [Dallas Slaughter](https://www.linkedin.com/in/dallas-slaughter) -  [email](mailto:dslaughtr@gmail.com)
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+**YouDoYou** is a gamified to-do list. It enables users to solidify good habits and help ensure completion of tasks by giving simple (pixelated) rewards for completing tasks.
 
-### With the Ionic CLI:
+It is a re-incarnation of a previous project: [YouDoYou-java](https://github.com/Atticus29/YouDoYou)
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+It is created in Ionic2, so it will run on Android, iOS, or your browser.
+
+
+## Features
+
+
+## Screenshots
+
+_coming soon...._
+
+## Setup/Installation Requirements
+
+* _Clone this repo to your local machine_
 
 ```bash
 $ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
 ```
 
-Then, to run it, cd into `myBlank` and run:
+Then, to run it, cd into the app's directory (currently `ionic-todo`) and run one of the following commands:
 
+#### iOS
 ```bash
 $ ionic cordova platform add ios
 $ ionic cordova run ios
 ```
+#### Android
+```bash
+$ ionic cordova platform add ios
+$ ionic cordova run ios
+```
+#### Your web browser
+```bash
+$ ionic serve
+```
 
-Substitute ios for android if not on a Mac.
 
+## Missing Features/TODO
+
+
+
+## Known Bugs
+
+_None yet :)_
+
+
+## Support and contact details
+
+_If you have any issues or questions (or even suggestions!), email me at the address listed above, or raise an issue here_
+
+## Special Thanks
+
+[JaveBratt.com](https://javebratt.com) for some WONDERFUL guides!
+
+## Technologies Used
+
+_TypeScript, HTML, CSS, Ionic2, Cordova, Angular2, JavaScript, Android Emulator, Firebase Database and Auth_
+
+### License
+
+_MIT License_
+
+Copyright (c) 2017 - Dallas Slaughter
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
