@@ -7,8 +7,9 @@ import { AngularFireAuth } from 'angularfire2/auth'
 import { Observable } from 'rxjs/Observable'
 
 import { AuthProvider } from '../../providers/auth/auth'
+import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-data'
 
-import * as moment from 'moment'
+// import * as moment from 'moment'
 
 @IonicPage()
 @Component({
@@ -17,24 +18,18 @@ import * as moment from 'moment'
 })
 export class ProfilePage {
 
-  public todos: FirebaseListObservable<any>
-  public completed: FirebaseListObservable<any>
-  public user: FirebaseObjectObservable<any>
+  // public todos: FirebaseListObservable<any>
+  // public completed: FirebaseListObservable<any>
+  // public user: FirebaseObjectObservable<any>
 
   uid
   email
 
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public authData: AuthProvider) {
-    this.afAuth.authState.subscribe(auth => {
-      console.log(auth)
-      this.uid = auth.uid
-      this.email = auth.email
-      this.todos = db.list(this.uid+'/todos')
-      this.completed = db.list(this.uid+'/completed')
-      this.user = db.object(this.uid+'/user')
-    })
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) {
+
   }
 
-  ionViewDidLoad() {  }
+  ionViewDidLoad() {
+  console.log(this.fbData.getUserProfile()) }
 
 }

@@ -20,6 +20,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
+import { FirebaseDataProvider } from '../providers/firebase-data/firebase-data';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -59,7 +60,8 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    FirebaseDataProvider
   ]
 })
 export class AppModule {}
