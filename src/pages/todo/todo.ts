@@ -7,6 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth'
 import { Observable } from 'rxjs/Observable'
 
 import { AuthProvider } from '../../providers/auth/auth'
+import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-data'
 
 import * as moment from 'moment'
 
@@ -24,7 +25,7 @@ export class TodoPage {
   uid
   thisUser
 
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public authData: AuthProvider) {
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public authData: AuthProvider, public fbData: FirebaseDataProvider) {
     this.afAuth.authState.subscribe(auth => {
       this.uid = auth.uid
       this.todos = db.list(this.uid+'/todos')
@@ -111,23 +112,21 @@ export class TodoPage {
 
   markCompleted(todo) {
     //move todo to Completed and give user experience
-    let numTasksUpdated
+    // let numTasksUpdated
+    //
+    // let currentExpUpdated = this.thisUser.currentExp + todo.expOnComplete
+    //
+    // if (currentExpUpdated >= this.thisUser.neededExp) {
+    //   currentExpUpdated -= this.thisUser.neededExp
+    //   this.levelUp(currentExpUpdated, this.thisUser.level)
+    // }
 
-    let currentExpUpdated = this.thisUser.currentExp + todo.expOnComplete
+    // numTasksUpdated = this.thisUser.numTasksCompleted + 1
 
-    if (currentExpUpdated >= this.thisUser.neededExp) {
-      currentExpUpdated -= this.thisUser.neededExp
-      this.levelUp(currentExpUpdated, this.thisUser.level)
-    }
+    // this.updateUserCompleted(numTasksUpdated)
 
-    console.log("user numTasksCompleted before: "+this.thisUser.numTasksCompleted)
-    numTasksUpdated = this.thisUser.numTasksCompleted + 1
+    this.fbData.updateExperience(todo.expOnComplete)
 
-    console.log(numTasksUpdated)
-
-    this.updateUserCompleted(numTasksUpdated)
-
-    console.log(this.thisUser)
 
     this.todos.remove(todo.$key)
     this.completed.push(todo)

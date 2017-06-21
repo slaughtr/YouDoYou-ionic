@@ -27,6 +27,7 @@ export class FirebaseDataProvider {
     })
   }
 
+  //USER FUNCTIONS
   getUserProfile(): Promise<any> {
     return new Promise( (resolve, reject) => {
       firebase.database().ref(this.uid)
@@ -44,5 +45,19 @@ export class FirebaseDataProvider {
     });
   }
 
+  updateExperience(expAmount) {
+    let oldExp
+    firebase.database().ref(this.uid+'/user/currentExp').once('value')
+    .then(value => {
+      oldExp = value.val()
+      console.log('oldexp: '+oldExp)
+      console.log('expAmount: '+expAmount)
+      firebase.database().ref(this.uid)
+      .child('/user').update({
+        currentExp: oldExp+expAmount
+      })
+    }
+    )
+  }
 
 }
