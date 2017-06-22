@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { ToastController } from 'ionic-angular'
 import {AngularFireModule } from 'angularfire2'
 import {FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from 'angularfire2/database'
 import { AngularFireAuth } from 'angularfire2/auth'
@@ -17,7 +18,7 @@ export class FirebaseDataProvider {
   public completed: FirebaseListObservable<any>
   public todos: FirebaseListObservable<any>
 
-  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase) {
+  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase, public toastCtrl: ToastController) {
     this.afAuth.authState.subscribe(auth => {
       console.log(auth)
       this.uid = auth.uid
@@ -69,6 +70,11 @@ export class FirebaseDataProvider {
           level: newLevel,
           numTasksCompleted: newNumTasksCompleted
         })
+
+        let toast = this.toastCtrl.create({
+         message: 'LEVEL UP! You are now level '+newLevel+'! '+(newNeededExp-adjustedCurrentExp)+' experience to the next level!',
+         duration: 3000
+       }).present()
       } else {
         //not leveled up
         firebase.database().ref(this.uid)

@@ -64,9 +64,9 @@ export class AddItemPage {
       if (newItem.repeat === undefined || '') newItem.repeat = "No Repeat set"
       if (newItem.description === undefined || '') newItem.description = ""
       //arbitrary experience calculation
-      //base of 1 exp, plus estTime divided by 60, plus 1/10 of difficulty
+      //base of 10 exp, plus estTime divided by 60, plus 1/10 of difficulty
       //then the whole thing multiplied by two. Probably still a bit low
-      newItem.expOnComplete = (1 + ((newItem.estTime/60)+(.1*newItem.difficulty)))*2
+      newItem.expOnComplete = (10 + ((newItem.estTime/60)+(.1*newItem.difficulty)))*2
 
       this.view.dismiss(newItem)
   }
