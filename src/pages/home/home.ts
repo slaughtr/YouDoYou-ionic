@@ -31,12 +31,14 @@ export class HomePage {
     let addModal = this.popCtrl.create(AddItemPage)
 
     addModal.onDidDismiss(todo => {
-      if(todo) this.saveItem(todo)
+      if(todo) {
+        this.saveItem(todo)
 
-      let toast = this.toastCtrl.create({
-       message: 'Todo added, it will grant you '+ todo.expOnComplete + ' experience when you complete it!',
-       duration: 3000
-     }).present()
+        let toast = this.toastCtrl.create({
+          message: 'Todo added, it will grant you '+ todo.expOnComplete + ' experience when you complete it!',
+          duration: 3000
+        }).present()
+      }
     })
     addModal.present()
   }

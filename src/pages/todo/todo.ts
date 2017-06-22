@@ -42,6 +42,7 @@ export class TodoPage {
   }
 
   updateTodo(todo){
+    //TODO: this might need to just use the add item form
     let prompt = this.alertCtrl.create({
       title: 'Todo info',
       message: "Update this todo",
@@ -89,5 +90,4 @@ export class TodoPage {
     //using moment to get time until due
     //or time since due
     timeTilDue = todo => moment(todo.due).fromNow()
-
   }

@@ -55,7 +55,10 @@ export class AddItemPage {
         inSet: formData.inSet,
         skill: formData.skill,
         repeat: formData.repeat,
-        expOnComplete: formData.expOnComplete
+        //arbitrary experience calculation
+        //base of 10 exp, plus estTime divided by 60, plus 1/10 of difficulty
+        //then the whole thing multiplied by two. might still be a bit low
+        expOnComplete: ((10 + ((formData.estTime/60)+(.1*formData.difficulty)))*2).toFixed(2)
       }
 
       if (newItem.reward === undefined || '') newItem.reward = "No Reward"
@@ -63,10 +66,6 @@ export class AddItemPage {
       if (newItem.skill === undefined || '') newItem.skill = "No Skill attributed"
       if (newItem.repeat === undefined || '') newItem.repeat = "No Repeat set"
       if (newItem.description === undefined || '') newItem.description = ""
-      //arbitrary experience calculation
-      //base of 10 exp, plus estTime divided by 60, plus 1/10 of difficulty
-      //then the whole thing multiplied by two. Probably still a bit low
-      newItem.expOnComplete = ((10 + ((newItem.estTime/60)+(.1*newItem.difficulty)))*2).toFixed(2)
 
       this.view.dismiss(newItem)
   }
