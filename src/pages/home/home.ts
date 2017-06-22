@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import {  NavController, PopoverController, IonicPage } from 'ionic-angular'
+import {  NavController, PopoverController, IonicPage, ToastController } from 'ionic-angular'
 
 import { AddItemPage } from '../add-item/add-item'
 import { TodoPage } from '../todo/todo'
@@ -21,7 +21,7 @@ export class HomePage {
   completedTab;
   profileTab;
 
-  constructor(public navCtrl: NavController, public authData: AuthProvider, public popCtrl: PopoverController, public fbData: FirebaseDataProvider) {
+  constructor(public navCtrl: NavController, public authData: AuthProvider, public popCtrl: PopoverController, public fbData: FirebaseDataProvider, public toastCtrl: ToastController) {
     this.todoTab = TodoPage
     this.completedTab = CompletedPage
     this.profileTab = ProfilePage
@@ -30,7 +30,14 @@ export class HomePage {
   addItem(){
     let addModal = this.popCtrl.create(AddItemPage)
 
-    addModal.onDidDismiss(todo => { if(todo) this.saveItem(todo) })
+    addModal.onDidDismiss(todo => {
+      if(todo) this.saveItem(todo)
+
+      let toast = this.toastCtrl.create({
+       message: 'Todo added, it will grant you '+ todo.expOnComplete + ' experience when you complete it!',
+       duration: 3000
+     }).present()
+    })
     addModal.present()
   }
 

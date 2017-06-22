@@ -58,11 +58,11 @@ export class AddItemPage {
         expOnComplete: formData.expOnComplete
       }
 
-      if (newItem.reward === undefined) newItem.reward = "No Reward"
-      if (newItem.inSet === undefined) newItem.inSet = "Not in a Set"
-      if (newItem.skill === undefined) newItem.skill = "No Skill attributed"
-      if (newItem.repeat === undefined) newItem.repeat = "No Repeat set"
-      if (newItem.description === undefined) newItem.description = ""
+      if (newItem.reward === undefined || '') newItem.reward = "No Reward"
+      if (newItem.inSet === undefined || '') newItem.inSet = "Not in a Set"
+      if (newItem.skill === undefined || '') newItem.skill = "No Skill attributed"
+      if (newItem.repeat === undefined || '') newItem.repeat = "No Repeat set"
+      if (newItem.description === undefined || '') newItem.description = ""
       //arbitrary experience calculation
       //base of 1 exp, plus estTime divided by 60, plus 1/10 of difficulty
       //then the whole thing multiplied by two. Probably still a bit low

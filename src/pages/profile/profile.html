@@ -9,12 +9,9 @@
 
 <ion-content>
   <ion-fab top right>
-      <button ion-fab mini><ion-icon name="create"></ion-icon></button>
+      <button ion-fab mini disabled><ion-icon name="create"></ion-icon></button>
       <ion-fab-list>
-        <ion-label>Edit profile</ion-label><button ion-fab><ion-icon name="create"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+      <button ion-fab><ion-icon name="create"></ion-icon></button>
       </ion-fab-list>
     </ion-fab>
 
@@ -63,13 +60,13 @@
       </ion-col>
       <ion-col>
         <button ion-button icon-left clear small>
-          <div>SOME OTHER INFO HERE</div>
+          <div>Completed Tasks: {{(this.fbData.user | async)?.numTasksCompleted}}</div>
         </button>
       </ion-col>
-      <ion-col center text-center>
-        <ion-note>
-          Completed Tasks: {{(this.fbData.user | async)?.numTasksCompleted}}
-        </ion-note>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <div>Failed Tasks: {{(this.fbData.user | async)?.numTasksFailed}}</div>
+        </button>
       </ion-col>
     </ion-row>
 
