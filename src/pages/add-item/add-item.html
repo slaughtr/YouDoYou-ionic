@@ -8,7 +8,7 @@
       <ion-label>Title</ion-label>
       <ion-input formControlName="title"  placeholder="Name your to-do" type="text"></ion-input>
     </ion-item>
-    <p *ngIf="!addItemForm.controls.title.valid" danger padding-left>Title is empty</p>
+    <p class="requiredWarning" *ngIf="!addItemForm.controls.title.valid" danger padding-left>Title is empty</p>
 
 
     <ion-item>
@@ -20,7 +20,7 @@
       <ion-label>Due</ion-label>
       <ion-input formControlName="due" type="date"></ion-input>
     </ion-item>
-          <p *ngIf="!addItemForm.controls.due.valid" danger padding-left>You must assign a due date</p>
+          <p class="requiredWarning" *ngIf="!addItemForm.controls.due.valid" danger padding-left>You must assign a due date</p>
 
     <ion-item>
       <ion-label>Difficulty</ion-label>
@@ -31,7 +31,7 @@
         </ion-range>
 
     </ion-item>
-      <p *ngIf="!addItemForm.controls.difficulty.valid" danger padding-left>You must assign a difficulty</p>
+      <p class="requiredWarning" *ngIf="!addItemForm.controls.difficulty.valid" danger padding-left>You must assign a difficulty</p>
 
     <ion-item>
       /** TODO: have this changeable to hours via checkbox*/
@@ -41,7 +41,7 @@
           <ion-icon range-right name="star"></ion-icon>
         </ion-range>
     </ion-item>
-    <p *ngIf="!addItemForm.controls.estTime.valid" danger padding-left>You must assign an estimated time</p>
+    <p class="requiredWarning" *ngIf="!addItemForm.controls.estTime.valid" danger padding-left>You must assign an estimated time</p>
 
     <ion-item>
       <ion-label>Reward (Optional)</ion-label>
@@ -63,6 +63,7 @@
         /** TODO: as above, based on user's skills */
         /** if newSkill selected, popup options for making new skill */
         <ion-option value="newSkill">New Skill</ion-option>
+        <ion-option *ngFor="let skill of this.fbData.skills | async" value="{{skill.name}}">{{skill.name}}</ion-option>
       </ion-select>
     </ion-item>
 

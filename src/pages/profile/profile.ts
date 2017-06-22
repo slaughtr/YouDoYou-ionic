@@ -16,4 +16,37 @@ export class ProfilePage {
 
   ionViewDidEnter() { }
 
+  showAddSkillModal() {
+    //TODO: change this to modal, add select with icon options
+  let prompt = this.alertCtrl.create({
+    title: 'Add a new skill',
+    message: "What skill would you like to add?",
+    inputs: [ {
+        name: 'skillName',
+        placeholder: 'Programming'
+      } ],
+    buttons: [ {
+        text: 'Cancel',
+        handler: data => console.log('Cancel clicked')
+      },{
+        text: 'Save',
+        handler: data => this.saveSkill(data)
+      } ]
+  }).present();
+}
+
+saveSkill(skill) {
+
+  let newSkill = {
+    name : skill.skillName,
+    level: 1,
+    currentExp: 0,
+    neededExp: 100,
+    numTasksCompleted: 0,
+    numTasksFailed: 0
+  }
+
+  this.fbData.skills.push(newSkill)
+}
+
 }

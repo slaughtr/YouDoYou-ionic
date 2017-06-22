@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { ToastController } from 'ionic-angular'
 import {AngularFireModule } from 'angularfire2'
 import {FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from 'angularfire2/database'
 import { AngularFireAuth } from 'angularfire2/auth'
@@ -16,13 +17,15 @@ export class FirebaseDataProvider {
   public user: FirebaseObjectObservable<any>
   public completed: FirebaseListObservable<any>
   public todos: FirebaseListObservable<any>
+  public skills: FirebaseListObservable<any>
 
-  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase) {
+  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase, public toastCtrl: ToastController) {
     this.afAuth.authState.subscribe(auth => {
       console.log(auth)
       this.uid = auth.uid
       this.todos = db.list(this.uid+'/todos')
       this.completed = db.list(this.uid+'/completed')
+      this.skills = db.list(this.uid+'/skills')
       this.user = db.object(this.uid+'/user')
     })
   }
@@ -58,7 +61,7 @@ export class FirebaseDataProvider {
       //check if leveled up
       if (newExp >= value.val().neededExp) {
         //leveled up
-        let newLevel = value.val().level ++
+        let newLevel = value.val().level + 1
         let newNeededExp = newLevel * 100
         let adjustedCurrentExp = newExp - value.val().neededExp
 
@@ -69,6 +72,11 @@ export class FirebaseDataProvider {
           level: newLevel,
           numTasksCompleted: newNumTasksCompleted
         })
+
+        let toast = this.toastCtrl.create({
+          message: 'LEVEL UP! You are now level '+newLevel+'! '+(newNeededExp-adjustedCurrentExp)+' experience to the next level!',
+          duration: 3000
+        }).present()
       } else {
         //not leveled up
         firebase.database().ref(this.uid)
