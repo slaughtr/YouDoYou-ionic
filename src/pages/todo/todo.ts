@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular'
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, ToastController } from 'ionic-angular'
 
 import { AuthProvider } from '../../providers/auth/auth'
 import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-data'
@@ -13,7 +13,7 @@ import * as moment from 'moment'
 })
 export class TodoPage {
 
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) { }
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider, public toastCtrl: ToastController) { }
 
   ionViewDidLoad() {  }
 
@@ -76,6 +76,11 @@ export class TodoPage {
     //TODO: some kind of check somewhere to see
     //if this todo has been completed before
     this.fbData.updateExperience(todo.expOnComplete, true)
+
+    let toast = this.toastCtrl.create({
+     message: 'Good job! You earned '+todo.expOnComplete+' experience!',
+     duration: 3000
+   }).present()
 
     this.fbData.todos.remove(todo.$key)
     this.fbData.completed.push(todo)

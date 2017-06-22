@@ -66,7 +66,7 @@ export class AddItemPage {
       //arbitrary experience calculation
       //base of 10 exp, plus estTime divided by 60, plus 1/10 of difficulty
       //then the whole thing multiplied by two. Probably still a bit low
-      newItem.expOnComplete = (10 + ((newItem.estTime/60)+(.1*newItem.difficulty)))*2
+      newItem.expOnComplete = ((10 + ((newItem.estTime/60)+(.1*newItem.difficulty)))*2).toFixed(2)
 
       this.view.dismiss(newItem)
   }
