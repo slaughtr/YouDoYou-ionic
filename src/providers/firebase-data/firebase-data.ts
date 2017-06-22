@@ -45,19 +45,48 @@ export class FirebaseDataProvider {
     });
   }
 
-  updateExperience(expAmount) {
-    let oldExp
-    firebase.database().ref(this.uid+'/user/currentExp').once('value')
+
+  updateExperience(expAmount, didCompleteTask) {
+    firebase.database().ref(this.uid+'/user').once('value')
     .then(value => {
-      oldExp = value.val()
-      console.log('oldexp: '+oldExp)
-      console.log('expAmount: '+expAmount)
-      firebase.database().ref(this.uid)
-      .child('/user').update({
-        currentExp: oldExp+expAmount
-      })
-    }
-    )
+
+      let newNumTasksCompleted = value.val().numTasksCompleted
+      //is exp from completing a task?
+      if (didCompleteTask) {
+        newNumTasksCompleted++
+      }
+      
+      let newExp = value.val().currentExp + expAmount
+
+      //check if leveled up
+      if (newExp >= value.val().neededExp) {
+        //leveled up
+        let newLevel = value.val().level ++
+        let newNeededExp = newLevel * 100
+        let adjustedCurrentExp = newExp - value.val().neededExp
+
+        firebase.database().ref(this.uid)
+        .child('/user').update({
+          currentExp: adjustedCurrentExp,
+          neededExp: newNeededExp,
+          level: newLevel,
+          numTasksCompleted: newNumTasksCompleted
+        })
+      } else {
+        //not leveled up
+        firebase.database().ref(this.uid)
+        .child('/user').update({
+          currentExp: newExp,
+          numTasksCompleted: newNumTasksCompleted
+        })
+      }
+    })
   }
+
+
+
+
+  //todos
+
 
 }
