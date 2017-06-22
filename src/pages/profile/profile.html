@@ -8,48 +8,33 @@
 
 
 <ion-content>
-  <ion-fab top right>
-      <button ion-fab mini disabled><ion-icon name="create"></ion-icon></button>
-      <ion-fab-list>
-      <button ion-fab><ion-icon name="create"></ion-icon></button>
-      </ion-fab-list>
-    </ion-fab>
 
   <ion-card>
 
     <ion-item>
       <ion-avatar item-start>
-        <!-- <img src="img/marty-avatar.png"> -->
+        <img src="https://i1.wp.com/www.techrepublic.com/bundles/techrepubliccore/images/icons/standard/icon-user-default.png">
       </ion-avatar>
       <h2>{{(this.fbData.user | async)?.name}}</h2>
       <p>LEVEL: {{(this.fbData.user | async)?.level}}</p>
     </ion-item>
 
-    <!-- <img src=""> -->
 
     <ion-card-content>
       <ion-list>
-  <ion-item>
-    <!-- <ion-avatar item-start>
-      <img src="img/avatar-cher.png">
-    </ion-avatar> -->
-{{(this.fbData.user | async)?.uid}}
-  </ion-item>
+        <ion-item>
+          <button ion-button block (click)="showAddSkillModal()">Add a Skill</button>
+        </ion-item>
 
-  <ion-item>
-    <!-- <ion-avatar item-start>
-      <img src="img/avatar-cher.png">
-    </ion-avatar> -->
+        <ion-item>
 
-  </ion-item>
+        </ion-item>
 
-  <ion-item>
-    <!-- <ion-avatar item-start>
-      <img src="img/avatar-cher.png">
-    </ion-avatar> -->
+        <ion-item>
 
-  </ion-item>
-</ion-list>
+        </ion-item>
+
+      </ion-list>
     </ion-card-content>
 
     <ion-row id="footer">

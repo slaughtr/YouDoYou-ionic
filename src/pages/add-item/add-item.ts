@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { NavController, ViewController } from 'ionic-angular'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
+import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-data'
 import * as moment from 'moment'
 
 @Component({
@@ -25,7 +26,7 @@ export class AddItemPage {
   addItemForm: FormGroup
 
 
-  constructor(public navCtrl: NavController, public view: ViewController, private builder: FormBuilder) {
+  constructor(public navCtrl: NavController, public view: ViewController, public builder: FormBuilder, public fbData: FirebaseDataProvider) {
     this.addItemForm = builder.group({
       'title': ['', Validators.required],
       'description': [''],

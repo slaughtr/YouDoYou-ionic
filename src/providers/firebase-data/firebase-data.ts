@@ -17,6 +17,7 @@ export class FirebaseDataProvider {
   public user: FirebaseObjectObservable<any>
   public completed: FirebaseListObservable<any>
   public todos: FirebaseListObservable<any>
+  public skills: FirebaseListObservable<any>
 
   constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase, public toastCtrl: ToastController) {
     this.afAuth.authState.subscribe(auth => {
@@ -24,6 +25,7 @@ export class FirebaseDataProvider {
       this.uid = auth.uid
       this.todos = db.list(this.uid+'/todos')
       this.completed = db.list(this.uid+'/completed')
+      this.skills = db.list(this.uid+'/skills')
       this.user = db.object(this.uid+'/user')
     })
   }
@@ -54,13 +56,10 @@ export class FirebaseDataProvider {
       let newNumTasksCompleted = value.val().numTasksCompleted
       //is exp from completing a task?
       if (didCompleteTask) newNumTasksCompleted++
-      console.log('current exp before: '+value.val().currentExp)
-      console.log('exp added: ' +expAmount)
 
       let newExp = value.val().currentExp + expAmount
       //check if leveled up
       if (newExp >= value.val().neededExp) {
-        console.log(newExp)
         //leveled up
         let newLevel = value.val().level + 1
         let newNeededExp = newLevel * 100
@@ -75,9 +74,9 @@ export class FirebaseDataProvider {
         })
 
         let toast = this.toastCtrl.create({
-         message: 'LEVEL UP! You are now level '+newLevel+'! '+(newNeededExp-adjustedCurrentExp)+' experience to the next level!',
-         duration: 3000
-       }).present()
+          message: 'LEVEL UP! You are now level '+newLevel+'! '+(newNeededExp-adjustedCurrentExp)+' experience to the next level!',
+          duration: 3000
+        }).present()
       } else {
         //not leveled up
         firebase.database().ref(this.uid)
