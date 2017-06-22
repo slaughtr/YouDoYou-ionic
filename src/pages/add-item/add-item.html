@@ -1,50 +1,56 @@
 
 
 <ion-content>
+  <form [formGroup]="addItemForm" (ngSubmit)="saveItem(addItemForm.value)">
   <ion-list>
 
     <ion-item>
       <ion-label>Title</ion-label>
-      <ion-input placeholder="Name your to-do" type="text" [(ngModel)]="title" ng-required="true"></ion-input>
+      <ion-input formControlName="title"  placeholder="Name your to-do" type="text"></ion-input>
     </ion-item>
+    <p *ngIf="!addItemForm.controls.title.valid" danger padding-left>Title is empty</p>
+
 
     <ion-item>
       <ion-label>Description (Optional)</ion-label>
-      <ion-input placeholder="Optional description for your to-do" type="text" [(ngModel)]="description"></ion-input>
+      <ion-input formControlName="description" placeholder="Optional description for your to-do" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Due</ion-label>
-      <ion-input type="date" [(ngModel)]="due"></ion-input>
+      <ion-input formControlName="due" type="date"></ion-input>
     </ion-item>
+          <p *ngIf="!addItemForm.controls.due.valid" danger padding-left>You must assign a due date</p>
 
     <ion-item>
       <ion-label>Difficulty</ion-label>
 
-      <ion-range [(ngModel)]="difficulty" min="0" max="15" pin="true" snaps="true">
+      <ion-range formControlName="difficulty" min="0" max="15" pin="true" snaps="true">
           <ion-icon range-left small name="star-half"></ion-icon>
           <ion-icon range-right name="star"></ion-icon>
         </ion-range>
 
     </ion-item>
+      <p *ngIf="!addItemForm.controls.difficulty.valid" danger padding-left>You must assign a difficulty</p>
 
     <ion-item>
       /** TODO: have this changeable to hours via checkbox*/
       <ion-label>Estimated Time (In Minutes)</ion-label>
-      <ion-range [(ngModel)]="estTime" min="1" max="60" pin="true" snaps="true">
+      <ion-range formControlName="estTime" min="1" max="60" pin="true" snaps="true">
           <ion-icon range-left small name="star-half"></ion-icon>
           <ion-icon range-right name="star"></ion-icon>
         </ion-range>
     </ion-item>
+    <p *ngIf="!addItemForm.controls.estTime.valid" danger padding-left>You must assign an estimated time</p>
 
     <ion-item>
       <ion-label>Reward (Optional)</ion-label>
-      <ion-input type="text" [(ngModel)]="reward"></ion-input>
+      <ion-input formControlName="reward" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Part of Set (Optional)</ion-label>
-      <ion-select [(ngModel)]="inSet">
+      <ion-select formControlName="inSet">
         /**TODO: ngFor this based on list of user's sets */
         /** if newSet selected, popup options for making new set */
         <ion-option value="newSet">New Set</ion-option>
@@ -53,7 +59,7 @@
 
     <ion-item>
       <ion-label>Skill (Optional)</ion-label>
-      <ion-select [(ngModel)]="skill">
+      <ion-select formControlName="skill">
         /** TODO: as above, based on user's skills */
         /** if newSkill selected, popup options for making new skill */
         <ion-option value="newSkill">New Skill</ion-option>
@@ -62,7 +68,7 @@
 
     <ion-item>
       <ion-label>Repeat? (Optional)</ion-label>
-      <ion-select [(ngModel)]="repeat">
+      <ion-select formControlName="repeat">
         /** TODO: this should probably be user-definable to give the most options */
         <ion-option value="daily">Daily</ion-option>
         <ion-option value="eoDay">Every Other Day</ion-option>
@@ -76,6 +82,7 @@
 
   </ion-list>
 
-  <button full ion-button color="secondary" (click)="saveItem()">Save</button>
+  <button *ngIf="addItemForm.controls.title.valid && addItemForm.controls.difficulty.valid && addItemForm.controls.estTime.valid && addItemForm.controls.due.valid" full ion-button type="submit" color="secondary">Save</button>
 
+</form>
 </ion-content>
