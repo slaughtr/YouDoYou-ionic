@@ -54,12 +54,15 @@ export class FirebaseDataProvider {
       let newNumTasksCompleted = value.val().numTasksCompleted
       //is exp from completing a task?
       if (didCompleteTask) newNumTasksCompleted++
+      console.log('current exp before: '+value.val().currentExp)
+      console.log('exp added: ' +expAmount)
 
       let newExp = value.val().currentExp + expAmount
       //check if leveled up
       if (newExp >= value.val().neededExp) {
+        console.log(newExp)
         //leveled up
-        let newLevel = value.val().level ++
+        let newLevel = value.val().level + 1
         let newNeededExp = newLevel * 100
         let adjustedCurrentExp = newExp - value.val().neededExp
 
