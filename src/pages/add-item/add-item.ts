@@ -1,5 +1,7 @@
 import { Component } from '@angular/core'
 import { NavController, ViewController } from 'ionic-angular'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+
 import * as moment from 'moment'
 
 @Component({
@@ -50,8 +52,8 @@ export class AddItemPage {
     if (newItem.description === undefined) newItem.description = ""
     //arbitrary experience calculation
     //base of 1 exp, plus estTime divided by 60, plus 1/10 of difficulty
-    //this is probably horrendous
-    newItem.expOnComplete = 1 + ((newItem.estTime/60)+(.1*newItem.difficulty))
+    //then the whole thing multiplied by two. Probably still a bit low
+    newItem.expOnComplete = (1 + ((newItem.estTime/60)+(.1*newItem.difficulty)))*2
 
     this.view.dismiss(newItem)
 
