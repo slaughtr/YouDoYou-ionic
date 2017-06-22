@@ -7,7 +7,7 @@
 <ion-content>
 
 <ul class="demo-list-two mdl-list">
-  <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let complete of completed | async" (click)="showOptions(complete)">
+  <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let complete of this.fbData.completed | async" (click)="showOptions(complete)">
     <span class="mdl-list__item-primary-content">
       <span>{{complete.title}}</span>
       <span class="mdl-list__item-sub-title">Due: {{complete.due}} - <span id="timeTilDue"> ({{this.timeTilDue(complete)}})</span></span>

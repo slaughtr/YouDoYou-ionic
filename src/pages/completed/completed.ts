@@ -1,12 +1,8 @@
 import { Component } from '@angular/core'
 import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular'
 
-import {AngularFireModule } from 'angularfire2'
-import {FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from 'angularfire2/database'
-import { AngularFireAuth } from 'angularfire2/auth'
-import { Observable } from 'rxjs/Observable'
-
 import { AuthProvider } from '../../providers/auth/auth'
+import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-data'
 
 import * as moment from 'moment'
 
@@ -17,52 +13,28 @@ import * as moment from 'moment'
 })
 export class CompletedPage {
 
-  public todos: FirebaseListObservable<any>
-  public completed: FirebaseListObservable<any>
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) {  }
 
-  uid
-
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public authData: AuthProvider) {
-    this.afAuth.authState.subscribe(auth => {
-      this.uid = auth.uid
-      this.todos = db.list(this.uid+'/todos')
-      this.completed = db.list(this.uid+'/completed')
-    })
-
-  }
-
-  ionViewDidLoad() {
-  }
-
+  ionViewDidLoad() { }
 
   showOptions(complete) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What do you want to do?',
-      buttons: [
-        {
+      buttons: [ {
           text: 'Un-complete',
-          handler: () => {
-            this.markIncomplete(complete)
-          }
+          handler: () => this.markIncomplete(complete)
         },{
           text: 'Delete forever',
           role: 'destructive',
-          handler: () => {
-            this.completed.remove(complete.$key)
-          }
+          handler: () => this.fbData.completed.remove(complete.$key)
         },{
           text: 'Update completed item',
-          handler: () => {
-            this.updateCompletedItem(complete)
-          }
+          handler: () => this.updateCompletedItem(complete)
         },{
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked')
-          }
-        }
-      ]
+          handler: () => console.log('Cancel clicked')
+        } ]
     })
     actionSheet.present()
   }
@@ -71,29 +43,22 @@ export class CompletedPage {
     let prompt = this.alertCtrl.create({
       title: 'Completed item info',
       message: "Update this completed item",
-      inputs: [
-        {
+      inputs: [ {
           name: 'title',
           placeholder: 'Title',
           value: complete.title
-        },
-        {
+        },{
           name: 'description',
           placeholder: 'Description',
           value: complete.description
-        },
-      ],
-      buttons: [
-        {
+        } ],
+      buttons: [ {
           text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked')
-          }
-        },
-        {
+          handler: data => console.log('Cancel clicked')
+        },{
           text: 'Save',
           handler: data => {
-            this.completed.update(complete.$key, {
+            this.fbData.completed.update(complete.$key, {
               title: data.title,
               description: data.description
             })
@@ -105,13 +70,12 @@ export class CompletedPage {
   }
 
   markIncomplete(complete) {
-    //move todo to Completed and give user experience
-    this.completed.remove(complete.$key)
-    this.todos.push(complete)
+    //TODO: make this set todo exp to 0 to prevent
+    //gaming of this system
+    this.fbData.completed.remove(complete.$key)
+    this.fbData.todos.push(complete)
   }
 
-  timeTilDue(complete) {
-    return moment(complete.due).fromNow()
-  }
-
+  timeTilDue = complete => moment(complete.due).fromNow()
+  
   }

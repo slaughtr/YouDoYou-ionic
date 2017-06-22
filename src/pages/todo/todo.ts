@@ -1,11 +1,6 @@
 import { Component } from '@angular/core'
 import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular'
 
-import {AngularFireModule } from 'angularfire2'
-import {FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from 'angularfire2/database'
-import { AngularFireAuth } from 'angularfire2/auth'
-import { Observable } from 'rxjs/Observable'
-
 import { AuthProvider } from '../../providers/auth/auth'
 import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-data'
 
@@ -18,9 +13,7 @@ import * as moment from 'moment'
 })
 export class TodoPage {
 
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) {
-
-  }
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) { }
 
   ionViewDidLoad() {  }
 
@@ -29,20 +22,20 @@ export class TodoPage {
       title: 'What do you want to do?',
       buttons: [ {
           text: 'Mark Completed',
-          handler: () => { this.markCompleted(todo) }
+          handler: () => this.markCompleted(todo)
         },{
           text: 'Delete todo',
           role: 'destructive',
-          handler: () => { this.fbData.todos.remove(todo.$key) }
+          handler: () => this.fbData.todos.remove(todo.$key)
           //TODO: confirm delete, remind user it's not
           //same as marking complete
         },{
           text: 'Update todo',
-          handler: () => { this.updateTodo(todo) }
+          handler: () => this.updateTodo(todo)
         },{
           text: 'Cancel',
           role: 'cancel',
-          handler: () => { console.log('Cancel clicked') }
+          handler: () => console.log('Cancel clicked')
         } ]
     })
     actionSheet.present()
@@ -64,7 +57,7 @@ export class TodoPage {
         } ],
       buttons: [ {
           text: 'Cancel',
-          handler: data => { console.log('Cancel clicked') }
+          handler: data => console.log('Cancel clicked')
         }, {
           text: 'Save',
           handler: data => {
@@ -80,6 +73,8 @@ export class TodoPage {
   }
 
   markCompleted(todo) {
+    //TODO: some kind of check somewhere to see
+    //if this todo has been completed before
     this.fbData.updateExperience(todo.expOnComplete, true)
 
     this.fbData.todos.remove(todo.$key)

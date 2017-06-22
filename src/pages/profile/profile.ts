@@ -12,13 +12,8 @@ import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-dat
 })
 export class ProfilePage {
 
-  user
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) { }
 
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) {
-  
-  }
-
-  ionViewDidEnter() {
-  this.fbData.getUserProfile().then(userSnapshot => this.user = userSnapshot) }
+  ionViewDidEnter() { }
 
 }
