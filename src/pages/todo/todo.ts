@@ -18,17 +18,8 @@ import * as moment from 'moment'
 })
 export class TodoPage {
 
-  public todos: FirebaseListObservable<any>
-  public completed: FirebaseListObservable<any>
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public authData: AuthProvider, public fbData: FirebaseDataProvider) {
 
-  uid
-
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public authData: AuthProvider, public fbData: FirebaseDataProvider) {
-    this.afAuth.authState.subscribe(auth => {
-      this.uid = auth.uid
-      this.todos = db.list(this.uid+'/todos')
-      this.completed = db.list(this.uid+'/completed')
-    })
   }
 
   ionViewDidLoad() {  }
@@ -42,7 +33,7 @@ export class TodoPage {
         },{
           text: 'Delete todo',
           role: 'destructive',
-          handler: () => { this.todos.remove(todo.$key) }
+          handler: () => { this.fbData.todos.remove(todo.$key) }
           //TODO: confirm delete, remind user it's not
           //same as marking complete
         },{
@@ -77,7 +68,7 @@ export class TodoPage {
         }, {
           text: 'Save',
           handler: data => {
-            this.todos.update(todo.$key, {
+            this.fbData.todos.update(todo.$key, {
               title: data.title,
               description: data.description
             })
@@ -91,14 +82,12 @@ export class TodoPage {
   markCompleted(todo) {
     this.fbData.updateExperience(todo.expOnComplete, true)
 
-    this.todos.remove(todo.$key)
-    this.completed.push(todo)
+    this.fbData.todos.remove(todo.$key)
+    this.fbData.completed.push(todo)
   }
 
-
-
-
-
-    timeTilDue(todo) { return moment(todo.due).fromNow() }
+    //using moment to get time until due
+    //or time since due
+    timeTilDue = todo => moment(todo.due).fromNow()
 
   }

@@ -10,7 +10,7 @@
 <ion-content>
 
 <ul class="demo-list-two mdl-list">
-  <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let todo of todos | async" (click)="showOptions(todo)">
+  <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let todo of this.fbData.todos | async" (click)="showOptions(todo)">
     <span class="mdl-list__item-primary-content">
       <span>{{todo.title}}</span>
       <span class="mdl-list__item-sub-title">Due: {{todo.due}} - <span id="timeTilDue"> ({{this.timeTilDue(todo)}})</span></span>
