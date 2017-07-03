@@ -3,7 +3,6 @@
 General plan for YouDoYou, divvied up into must have/want to have/dream of having.
 
 ## MUST
-
 * ~~User is player, has experience etc~~
 * ~~Mark tasks done~~
 * ~~Send marked tasks to separate list~~
@@ -40,6 +39,7 @@ General plan for YouDoYou, divvied up into must have/want to have/dream of havin
 * Google sign in
 * User settable colors/themes
 * Notifications/reminders
+* Move level up and various other checks to Firebase Functions
 
 
 ## DREAM

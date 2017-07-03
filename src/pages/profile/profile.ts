@@ -36,7 +36,6 @@ export class ProfilePage {
 }
 
 saveSkill(skill) {
-
   let newSkill = {
     name : skill.skillName,
     level: 1,
@@ -45,8 +44,12 @@ saveSkill(skill) {
     numTasksCompleted: 0,
     numTasksFailed: 0
   }
-
   this.fbData.skills.push(newSkill)
+}
+
+showSkillDetails(skill) {
+  //TODO: this opens modal or page with more detailed skill info (or use pipe to just filter todos/completeds by this skill?)
+  console.log("got the click  " + skill)
 }
 
 }

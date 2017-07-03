@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <ion-card>
+  <ion-card id="masterCard">
 
     <ion-item>
       <ion-avatar item-start>
@@ -19,23 +19,19 @@
       <p>LEVEL: {{(this.fbData.user | async)?.level}}</p>
     </ion-item>
 
+    <button ion-button block (click)="showAddSkillModal()">Add a Skill</button>
 
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <button ion-button block (click)="showAddSkillModal()">Add a Skill</button>
-        </ion-item>
+    <ion-content class="card-background-page">
 
-        <ion-item>
+      <ion-card *ngFor="let skill of this.fbData.skills | async" class="skillCards">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Greek_Keyboard_(Macbook_Pro).jpg"/>
+        <div class="card-title" (click)="showSkillDetails(skill)">{{skill.name}}</div>
+        <div class="card-subtitle">Completed Tasks: {{skill.numTasksCompleted}}<br>Failed Tasks: {{skill.numTasksFailed}}</div>
+        <div class="skillExperience">Experience: {{skill.currentExp}}/{{skill.neededExp}}</div>
+        <div class="skillLevel">Level: {{skill.level}}</div>
+      </ion-card>
 
-        </ion-item>
-
-        <ion-item>
-
-        </ion-item>
-
-      </ion-list>
-    </ion-card-content>
+    </ion-content>
 
     <ion-row id="footer">
       <ion-col>
