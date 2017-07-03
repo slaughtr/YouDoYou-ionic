@@ -45,6 +45,15 @@ export class AddItemPage {
 
       let dateTime = moment().format('L') + " " + moment().format('LT')
 
+      let skillArray = formData.skill.split('^^')
+      let skillKey = skillArray[0]
+      let skillName = skillArray[1]
+
+      if (skillKey === undefined || skillName === undefined) {
+        skillKey = ''
+        skillName = ''
+      }
+
       let newItem = {
         title: formData.title,
         description: formData.description,
@@ -54,7 +63,8 @@ export class AddItemPage {
         estTime: formData.estTime,
         reward: formData.reward,
         inSet: formData.inSet,
-        skill: formData.skill,
+        skillName: skillName,
+        skillKey: skillKey,
         repeat: formData.repeat,
         //arbitrary experience calculation
         //base of 10 exp, plus estTime divided by 60, plus 1/10 of difficulty
@@ -64,7 +74,7 @@ export class AddItemPage {
 
       if (newItem.reward === undefined || '') newItem.reward = "No Reward"
       if (newItem.inSet === undefined || '') newItem.inSet = "Not in a Set"
-      if (newItem.skill === undefined || '') newItem.skill = "No Skill attributed"
+      // if (newItem.skill === undefined || '') newItem.skill = "No Skill attributed"
       if (newItem.repeat === undefined || '') newItem.repeat = "No Repeat set"
       if (newItem.description === undefined || '') newItem.description = ""
 

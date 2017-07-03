@@ -10,8 +10,8 @@
     <ion-item-sliding *ngFor="let complete of this.fbData.completed | async" (click)="showOptions(complete)">
       <ion-item>
       <h2>{{complete.title}}</h2>
-      <h3>Due: {{complete.due}}  - <span id="timeTilDue"> ({{this.timeTilDue(complete)}})</span></h3>
-      <p>Skill: {{complete.skill}}</p>
+      <h3>Completed On: {{complete.completedOn}}  - <span id="timeTilDue"> ({{this.timeSinceCompleted(complete)}})</span></h3>
+      <p>Skill: {{complete.skillName}}</p>
     </ion-item>
       <ion-item-options side="left">
         <button ion-button>Favorite</button>

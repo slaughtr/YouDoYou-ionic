@@ -76,7 +76,7 @@ export class TodoPage {
   markCompleted(todo) {
     //TODO: some kind of check somewhere to see
     //if this todo has been completed before
-    this.fbData.updateExperience(todo.expOnComplete, true)
+    this.fbData.updateExperience(todo.expOnComplete, true, todo.skillKey)
 
     let toast = this.toastCtrl.create({
      message: 'Good job! You earned '+todo.expOnComplete+' experience!',
@@ -84,7 +84,7 @@ export class TodoPage {
    }).present()
 
    let now = moment().format('L') + " " + moment().format('LT')
-   
+
    todo.completedOn = now
 
     this.fbData.todos.remove(todo.$key)

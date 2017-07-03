@@ -63,7 +63,7 @@
         /** TODO: as above, based on user's skills */
         /** if newSkill selected, popup options for making new skill */
         <ion-option value="newSkill">New Skill</ion-option>
-        <ion-option *ngFor="let skill of this.fbData.skills | async" value="{{skill.name}}">{{skill.name}}</ion-option>
+        <ion-option *ngFor="let skill of this.fbData.skills | async" value="{{skill.$key}}^^{{skill.name}}">{{skill.name}}</ion-option>
       </ion-select>
     </ion-item>
 

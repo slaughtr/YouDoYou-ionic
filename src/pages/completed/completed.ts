@@ -76,6 +76,6 @@ export class CompletedPage {
     this.fbData.todos.push(complete)
   }
 
-  timeTilDue = complete => moment(complete.due).fromNow()
-  
+  timeSinceCompleted = complete => moment(complete.completedOn).fromNow()
+
   }
