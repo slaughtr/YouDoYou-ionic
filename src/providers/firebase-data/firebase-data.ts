@@ -87,10 +87,7 @@ export class FirebaseDataProvider {
       }
     })
   }
-
-
-
-
+  
   //todos
 
 

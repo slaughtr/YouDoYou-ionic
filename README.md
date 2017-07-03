@@ -28,15 +28,15 @@ $ sudo npm install -g ionic cordova
 
 Then, to run it, cd into the app's directory (currently `ionic-todo`) and run one of the following commands:
 
-#### iOS
+#### iOS (must have emulator started before running these commands)
 ```bash
 $ ionic cordova platform add ios
 $ ionic cordova run ios
 ```
-#### Android
+#### Android (must have emulator started before running these commands)
 ```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+$ ionic cordova platform add android
+$ ionic cordova run android
 ```
 #### Your web browser
 ```bash

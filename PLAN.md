@@ -13,12 +13,14 @@ General plan for YouDoYou, divvied up into must have/want to have/dream of havin
   * Set task into set
 * Skills
   * ~~Make skills~~
-  * Skills have experience
-  * Skill list in profile (or grid?)
-  * User-settable background pictures for skills, or something similar
+  * ~~Skills have experience~~
+    * Skills get experience by completing tasks in that skill
+  * ~~Skill list in profile~~ (or grid?)
+  * User-settable background pictures for skills, or something similar (need some default images)
+  * Maybe there should be skill "categories"? For use with default background pictures/better sorting. Health/Fitness/Education/Work/etc
 * Better info in main screen
-  * Skill description
-  * Skill difficulty (icons?)
+  * Todo description
+  * Todo difficulty (icons?)
   * Due dates to better format
     * If this week, use day (on Friday? Friday? this Friday?)
     * If this month, use day and date (Friday the 13th? Fri the 13th?)
