@@ -29,7 +29,8 @@ General plan for YouDoYou, divvied up into must have/want to have/dream of havin
   * Experience on complete?
   * Repeat
   * Reward (if any)
-* More MDL: https://getmdl.io/components/index.html
+* ~~More MDL: https://getmdl.io/components/index.html~~
+  * Using native Ionic components instead for now
 * Colors/themes
 * ~~Firebase nodes by UID~~
 * ~~New task to form with validation~~

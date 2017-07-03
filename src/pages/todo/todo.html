@@ -9,17 +9,23 @@
 
 <ion-content>
 
-<ul class="demo-list-two mdl-list">
-  <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let todo of this.fbData.todos | async" (click)="showOptions(todo)">
-    <span class="mdl-list__item-primary-content">
-      <span>{{todo.title}}</span>
-      <span class="mdl-list__item-sub-title">Due: {{todo.due}} - <span id="timeTilDue"> ({{this.timeTilDue(todo)}})</span></span>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <span class="mdl-list__item-secondary-info">Skill: {{todo.skill}}</span>
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">done</i></a>
-    </span>
-  </li>
-</ul>
+
+<ion-list>
+  <ion-item-sliding *ngFor="let todo of this.fbData.todos | async" (click)="showOptions(todo)">
+    <ion-item>
+    <h2>{{todo.title}}</h2>
+    <h3>Due: {{todo.due}}  - <span id="timeTilDue"> ({{this.timeTilDue(todo)}})</span></h3>
+    <p>Skill: {{todo.skill}}</p>
+  </ion-item>
+    <ion-item-options side="left">
+      <button ion-button>Favorite</button>
+      <button ion-button color="danger">Share</button>
+    </ion-item-options>
+
+    <ion-item-options side="right">
+      <button ion-button>Unread</button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
 
 </ion-content>
