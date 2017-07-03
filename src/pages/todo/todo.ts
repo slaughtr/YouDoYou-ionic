@@ -83,6 +83,10 @@ export class TodoPage {
      duration: 3000
    }).present()
 
+   let now = moment().format('L') + " " + moment().format('LT')
+   
+   todo.completedOn = now
+
     this.fbData.todos.remove(todo.$key)
     this.fbData.completed.push(todo)
   }
