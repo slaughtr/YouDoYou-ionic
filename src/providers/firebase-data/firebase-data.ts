@@ -50,8 +50,6 @@ export class FirebaseDataProvider {
 
 
   updateExperience(expAmount, didCompleteTask, skillKey) {
-    console.log("skillkey: " + skillKey)
-
     //TODO: move all this to firebase functions
     //first update the user
     firebase.database().ref(this.uid+'/user').once('value')
@@ -92,46 +90,52 @@ export class FirebaseDataProvider {
     })
 
     //now update the skill
+    //check length of key first, no need to hit the
+    //DB if it's not the right length
     if (skillKey.length === 20) {
-      console.log("skillkey in if check: " + skillKey)
-    firebase.database().ref(this.uid+'/skills/'+skillKey).once('value')
-    .then(value => {
-      console.log(value)
-      let newNumTasksCompleted : number = parseInt(value.val().numTasksCompleted)
-      //is exp from completing a task?
-      if (didCompleteTask) newNumTasksCompleted++
+      firebase.database().ref(this.uid+'/skills/'+skillKey).once('value')
+      .then(value => {
+        if(value){
+          //in case somehow there's a faulty key,
+          //let's make sure it's in the DB
+          //TODO: some kind of handling on false
+          let newNumTasksCompleted : number = parseInt(value.val().numTasksCompleted)
+          //is exp from completing a task?
+          if (didCompleteTask) newNumTasksCompleted++
 
-      let newExp : number = parseFloat(value.val().currentExp) + parseFloat(expAmount)
-      //check if leveled up
-      if (newExp >= value.val().neededExp) {
-        //leveled up
-        let newLevel : number = parseInt(value.val().level) + 1
-        let newNeededExp : number = newLevel * 100
-        let adjustedCurrentExp : number = newExp - parseFloat(value.val().neededExp)
+          let newExp : number = parseFloat(value.val().currentExp) + parseFloat(expAmount)
+          //check if leveled up
+          if (newExp >= value.val().neededExp) {
+            //leveled up
+            let newLevel : number = parseInt(value.val().level) + 1
+            let newNeededExp : number = newLevel * 100
+            let adjustedCurrentExp : number = newExp - parseFloat(value.val().neededExp)
 
-        firebase.database().ref(this.uid)
-        .child('/skills/'+skillKey).update({
-          currentExp: adjustedCurrentExp,
-          neededExp: newNeededExp,
-          level: newLevel,
-          numTasksCompleted: newNumTasksCompleted
-        })
+            firebase.database().ref(this.uid)
+            .child('/skills/'+skillKey).update({
+              currentExp: adjustedCurrentExp,
+              neededExp: newNeededExp,
+              level: newLevel,
+              numTasksCompleted: newNumTasksCompleted
+            })
+            
+            let toast = this.toastCtrl.create({
+              message: 'SKILL LEVEL UP! '+ value.name + ' is now level '+newLevel+'! '+(newNeededExp-adjustedCurrentExp)+' experience to the next level!',
+              duration: 3000
+            }).present()
+          } else {
+            //not leveled up
+            firebase.database().ref(this.uid+'/skills')
+            .child(skillKey).update({
+              currentExp: newExp.toFixed(2),
+              numTasksCompleted: newNumTasksCompleted
+            })
+          }
+        }
+      })
 
-        let toast = this.toastCtrl.create({
-          message: 'SKILL LEVEL UP! '+ value.name + ' is now level '+newLevel+'! '+(newNeededExp-adjustedCurrentExp)+' experience to the next level!',
-          duration: 3000
-        }).present()
-      } else {
-        console.log("i'm here so I should be updating the skill")
-        //not leveled up
-        firebase.database().ref(this.uid+'/skills')
-        .child(skillKey).update({
-          currentExp: newExp.toFixed(2),
-          numTasksCompleted: newNumTasksCompleted
-        })
-      }
-    })
-  }
+    }
+
   }
 
   //todos
