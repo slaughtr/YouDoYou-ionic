@@ -9,17 +9,25 @@
   <ion-list>
     <ion-item-sliding *ngFor="let complete of this.fbData.completed | async" (click)="showOptions(complete)">
       <ion-item>
-      <h2>{{complete.title}}</h2>
-      <h3>Completed On: {{complete.completedOn}}  - <span id="timeTilDue"> ({{this.timeSinceCompleted(complete)}})</span></h3>
-      <p>Skill: {{complete.skillName}}</p>
-    </ion-item>
+        <div class="leftFloaters">
+          <h2>{{complete.title}} <small>{{complete.description | uppercase}}</small></h2>
+          <h3>Skill: {{complete.skillName}}</h3>
+          <p>Completed: {{complete.completedOn}}  - <span id="timeTilDue"> ({{this.timeSinceCompleted(complete)}})</span></p>
+        </div>
+
+        <div class="rightFloaters">
+          <h4>Experience: {{complete.expOnComplete}}</h4>
+          <h6>Time: {{complete.estTime}} mins, Difficulty: {{complete.difficulty}}/15</h6>
+          <p>Repeat: {{complete.repeat}}</p>
+        </div>
+      </ion-item>
       <ion-item-options side="left">
-        <button ion-button>Favorite</button>
-        <button ion-button color="danger">Share</button>
+        <button ion-button>Add Skill</button>
+        <button ion-button color="danger">Make a Copy</button>
       </ion-item-options>
 
       <ion-item-options side="right">
-        <button ion-button>Unread</button>
+        <button ion-button>Mark Incomplete</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

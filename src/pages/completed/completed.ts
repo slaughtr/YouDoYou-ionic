@@ -76,6 +76,7 @@ export class CompletedPage {
     this.fbData.todos.push(complete)
   }
 
+  //TODO: format this so moment shuts up
   timeSinceCompleted = complete => moment(complete.completedOn).fromNow()
 
   }
