@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NavController, ViewController } from 'ionic-angular'
+import { NavController, ViewController, AlertController } from 'ionic-angular'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
 import { FirebaseDataProvider } from '../../providers/firebase-data/firebase-data'
@@ -26,7 +26,7 @@ export class AddItemPage {
   addItemForm: FormGroup
 
 
-  constructor(public navCtrl: NavController, public view: ViewController, public builder: FormBuilder, public fbData: FirebaseDataProvider) {
+  constructor(public navCtrl: NavController, public view: ViewController, public builder: FormBuilder, public fbData: FirebaseDataProvider, public alertCtrl: AlertController) {
     this.addItemForm = builder.group({
       'title': ['', Validators.required],
       'description': [''],

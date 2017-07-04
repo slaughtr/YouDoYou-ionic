@@ -51,18 +51,15 @@
     <ion-item>
       <ion-label>Part of Set (Optional)</ion-label>
       <ion-select formControlName="inSet">
-        /**TODO: ngFor this based on list of user's sets */
-        /** if newSet selected, popup options for making new set */
-        <ion-option value="newSet">New Set</ion-option>
+        /**TODO: ngFor this based on list of user's sets
+        also TODO: make sets work*/
+        <ion-option value="newSet">Not Yet</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Skill (Optional)</ion-label>
       <ion-select formControlName="skill">
-        /** TODO: as above, based on user's skills */
-        /** if newSkill selected, popup options for making new skill */
-        <ion-option value="newSkill">New Skill</ion-option>
         <ion-option *ngFor="let skill of this.fbData.skills | async" value="{{skill.$key}}^^{{skill.name}}">{{skill.name}}</ion-option>
       </ion-select>
     </ion-item>

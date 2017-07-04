@@ -54,7 +54,6 @@ export class FirebaseDataProvider {
     //first update the user
     firebase.database().ref(this.uid+'/user').once('value')
     .then(value => {
-
       let newNumTasksCompleted : number = value.val().numTasksCompleted
       //is exp from completing a task?
       if (didCompleteTask) newNumTasksCompleted++
@@ -118,7 +117,7 @@ export class FirebaseDataProvider {
               level: newLevel,
               numTasksCompleted: newNumTasksCompleted
             })
-            
+
             let toast = this.toastCtrl.create({
               message: 'SKILL LEVEL UP! '+ value.name + ' is now level '+newLevel+'! '+(newNeededExp-adjustedCurrentExp)+' experience to the next level!',
               duration: 3000
@@ -133,7 +132,6 @@ export class FirebaseDataProvider {
           }
         }
       })
-
     }
 
   }
