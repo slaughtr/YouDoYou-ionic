@@ -6,34 +6,32 @@
 
 </ion-header>
 
-
 <ion-content>
 
+  <ion-list>
+    <ion-item-sliding *ngFor="let todo of this.fbData.todos | async" (click)="showOptions(todo)">
+      <ion-item>
+        <div class="leftFloaters">
+          <h2>{{todo.title}} <small>{{todo.description | uppercase}}</small></h2>
+          <h3>Skill: {{todo.skillName}}</h3>
+          <p>Due: {{todo.due}}  - <span id="timeTilDue"> ({{this.timeTilDue(todo)}})</span></p>
+        </div>
 
-<ion-list>
-  <ion-item-sliding *ngFor="let todo of this.fbData.todos | async" (click)="showOptions(todo)">
-    <ion-item>
-      <div class="leftFloaters">
-    <h2>{{todo.title}} <small>{{todo.description | uppercase}}</small></h2>
-    <h3>Skill: {{todo.skillName}}</h3>
-    <p>Due: {{todo.due}}  - <span id="timeTilDue"> ({{this.timeTilDue(todo)}})</span></p>
-  </div>
+        <div class="rightFloaters">
+          <h4>Experience: {{todo.expOnComplete}}</h4>
+          <h6>Time: {{todo.estTime}} mins, Difficulty: {{todo.difficulty}}/15</h6>
+          <p>Repeat: {{todo.repeat}}</p>
+        </div>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button>Add Skill</button>
+        <button ion-button color="danger">Share</button>
+      </ion-item-options>
 
-  <div class="rightFloaters">
-    <h4>Experience: {{todo.expOnComplete}}</h4>
-    <h6>Time: {{todo.estTime}} mins, Difficulty: {{todo.difficulty}}/15</h6>
-    <p>Repeat: {{todo.repeat}}</p>
-  </div>
-  </ion-item>
-    <ion-item-options side="left">
-      <button ion-button>Favorite</button>
-      <button ion-button color="danger">Share</button>
-    </ion-item-options>
-
-    <ion-item-options side="right">
-      <button ion-button>Unread</button>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list>
+      <ion-item-options side="right">
+        <button ion-button>Mark Complete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>
